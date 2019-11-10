@@ -1,0 +1,15 @@
+version: '2.4'
+
+services:
+
+  backend:
+    build:
+      context: ../../
+      dockerfile: infra/docker/backend.dockerfile
+    image: ${REPO}/com.letgo.shout.backend:${TAG}
+    restart: always
+    volumes:
+      - ../../app:/app
+      - /tmp:/tmp
+    ports:
+      - 80:80

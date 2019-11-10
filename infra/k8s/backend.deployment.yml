@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    app: backend
+spec:
+  selector:
+    matchLabels:
+      app: backend
+      tier: backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: backend
+        tier: backend
+    spec:
+      imagePullSecrets:
+        - name: $REPO_CREDS
+      containers:
+        - name: backend
+          image: ${REPO}/com.letgo.shout.backend:${TAG}
+          resources:
+            requests:
+              cpu: 10m
+              memory: 128Mi
+          env:
+            - name: GET_HOSTS_FROM
+              value: dns
+          ports:
+            - containerPort: 80

@@ -1,0 +1,7 @@
+home:
+    path: /
+    controller: App\Letgo\Application\Controller\HomeController::index
+
+shout:
+    path: /shout/{twitterName}
+    controller: App\Letgo\Application\Controller\ShoutController::index
