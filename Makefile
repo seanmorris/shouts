@@ -22,12 +22,13 @@ test:
 		php:7.3.11-alpine php tests/runTests.php
 
 pack:
-	export TAR=/tmp/shout-api-seanmorris-`date +"%Y-%m-%d"`.tar.gz \
+	@ export TAR=/tmp/shout-api-seanmorris-`date +"%Y-%m-%d"`.tar.gz \
 	&& tar czf $$TAR --transform 's,^./,shout-api/,' \
 		--exclude='*.tar.gz' \
 		--exclude='.git' \
 		--exclude='.gcr_secret.json' . \
-	&& mv $$TAR .
+	&& mv $$TAR . \
+	&& echo "\n\t" `basename $$TAR` created. "\n"
 
 dependencies:
 	@ docker run --rm \

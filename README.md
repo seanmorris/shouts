@@ -86,3 +86,11 @@ Take the project down from the cluster like so:
 ```bash
 $ make cluster-delete
 ```
+
+## Packaging
+
+Run the following command to create a `.tar.gz` file of the entire project:
+
+```bash
+$ make pack
+```
