@@ -6,6 +6,8 @@ The ShoutApi is available at http://34.68.138.141.xip.io/, and will become avail
 
 ## Tests
 
+[![TravisCI build status](https://api.travis-ci.org/seanmorris/shouts.svg?branch=master)](https://travis-ci.org/seanmorris/shouts)
+
 ShoutApi tests are run on push to github by travis CI. Output is available here: https://travis-ci.org/seanmorris/shouts.
 
 Tests can be run locally in a similar fashion to starting a development instance. The third command is where it diverges.

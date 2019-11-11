@@ -1,3 +1,4 @@
+language: php
 services:
   - docker
 install:
