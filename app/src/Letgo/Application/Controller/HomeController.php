@@ -17,9 +17,9 @@ final class HomeController extends AbstractController
 
 			<h2>Making tweets <i>LOUDER</i></h2>
 
-			<p><i>Example:</i></p>
+			<a href = "/shout/realDonaldTrump?limit=2">View Live</a>
 
-			<a href = "/shout/realDonaldTrump?limit=2">View example</a>
+			<p><i>Example:</i></p>
 
 			<pre>
 			curl -s http://{$_SERVER['HTTP_HOST']}/shout/realDonaldTrump?limit=2

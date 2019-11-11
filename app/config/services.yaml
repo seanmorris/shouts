@@ -7,9 +7,6 @@ parameters:
   redis_server: redis
   redis_port:   6379
 
-# imports:
-#     - { resource: 'redis.yml' }
-
 services:
     # default configuration for services in *this* file
     _defaults:

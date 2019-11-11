@@ -24,7 +24,7 @@ The results of any given request to the Twitter API will be cached for 5 minutes
 
 ## Dependencies
 
-All the dependencies, their versions & configurations are handled by docker. You'll only need a few tools to actually interact with the project. There's no need to search the web for the right version of a given dependency to run the project.
+All the dependencies, their versions & configurations are handled by docker. You'll only need a few tools listed below to actually interact with the project. There's no need to search the web for the right version of a given dependency to run the project.
 
 The following technologies are used under the hood:
 
@@ -61,7 +61,13 @@ Simply clone the project and navigate to the directory. Run the following comman
 ```bash
 $ make dependencies # pull the composer depenencies
 $ make build        # build your images locally
-$ make start-fg     # start the project
+$ make start        # start the project
+```
+
+You can also use this in place of the last command to start the project in the foreground:
+
+```bash
+$ make start-fg     # start the project in the foreground
 ```
 
 Stop the project services with one command:

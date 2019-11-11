@@ -15,6 +15,9 @@ COMPOSE      ?=export REPO=${REPO} TAG=${TAG} TARGET=${TARGET} \
 build:
 	@ ${COMPOSE} build
 
+build-prod:
+	@ export TARGET=production && ${COMPOSE} build
+
 test:
 	@ docker run --rm \
 		-v `pwd`/app:/app \
@@ -26,6 +29,7 @@ pack:
 	&& tar czf $$TAR --transform 's,^./,shout-api/,' \
 		--exclude='*.tar.gz' \
 		--exclude='.git' \
+		--exclude='app/.env' \
 		--exclude='.gcr_secret.json' . \
 	&& mv $$TAR . \
 	&& echo "\n\t" `basename $$TAR` created. "\n"
