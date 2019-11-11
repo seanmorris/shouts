@@ -2,7 +2,7 @@
 
 ## Demo
 
-The ShoutApi is available at http://34.68.138.141.xip.io/, and will become available at http://shout.seanmorr.is/ as soon as the DNS propagates. It is currently running on Kubernetes under GKE on Google Cloud.
+The ShoutApi is available at http://35.225.137.171.xip.io/, and will become available at http://shout.seanmorr.is/ as soon as the DNS propagates. It is currently running on Kubernetes under GKE on Google Cloud.
 
 ## Tests
 
