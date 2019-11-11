@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: redis
   labels:
-    app: backend
+    app: redis
 spec:
   selector:
     matchLabels:
-      app: backend
+      app: redis
   replicas: 1
   template:
     metadata:
       labels:
-        app: backend
+        app: redis
     spec:
       imagePullSecrets:
         - name: $REPO_CREDS
       containers:
-        - name: backend
-          image: ${REPO}/com.letgo.shout.backend:${TAG}
+        - name: redis
+          image: redis:5.0
           resources:
             requests:
               cpu: 10m
@@ -27,4 +27,4 @@ spec:
             - name: GET_HOSTS_FROM
               value: dns
           ports:
-            - containerPort: 80
+            - containerPort: 6379

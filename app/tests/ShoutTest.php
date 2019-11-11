@@ -44,7 +44,7 @@ class ShoutTest extends \UnitTestCase
 		$expectations = [
 			'Gettin some chicken 🍗🍗🍗' => 'GETTIN SOME CHICKEN! 🍗🍗🍗',
 			'So hot today. 🌡️🌡️🌡️' => 'SO HOT TODAY! 🌡️🌡️🌡️',
-			'Honk honk. 🤡🌎'  => 'HONK HONK! 🤡🌎',
+			'Honk honk 🤡🌎'  => 'HONK HONK! 🤡🌎',
 		];
 
 		foreach($expectations as $input => $expectedOutput)

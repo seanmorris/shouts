@@ -72,6 +72,8 @@ cluster-credetials:
 
 cluster-apply:
 	@ export EXTERNAL_IP=${EXTERNAL_IP} REPO=${REPO} HOST=${HOST} REPO_CREDS=${REPO_CREDS} TAG=${TAG} \
+	&& cat infra/k8s/redis.deployment.yml | envsubst | kubectl apply -f - \
+	&& cat infra/k8s/redis.service.yml    | envsubst | kubectl apply -f - \
 	&& cat infra/k8s/backend.deployment.yml | envsubst | kubectl apply -f - \
 	&& cat infra/k8s/backend.service.yml    | envsubst | kubectl apply -f - \
 	&& cat infra/k8s/backend.ingress.yml    | envsubst | kubectl apply -f -
@@ -79,4 +81,4 @@ cluster-apply:
 cluster-delete:
 	@ export EXTERNAL_IP=${EXTERNAL_IP} \
 	; kubectl delete ingress backend \
-	; kubectl delete deployment,service backend
+	; kubectl delete deployment,service backend redis

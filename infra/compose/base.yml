@@ -13,3 +13,7 @@ services:
       - /tmp:/tmp
     ports:
       - 80:80
+
+  redis:
+    image: redis:5.0
+    restart: always

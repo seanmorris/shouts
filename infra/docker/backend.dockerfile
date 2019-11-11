@@ -5,7 +5,9 @@ COPY infra/backend/000-default.conf /etc/apache2/sites-available/000-default.con
 
 RUN rm -rfv /var/www/html \
     && ln -s /app/public /var/www/html \
-    && a2enmod rewrite
+    && a2enmod rewrite \
+    && pecl install redis \
+    && docker-php-ext-enable redis
 
 FROM development AS production
 

@@ -1,0 +1,6 @@
+services:
+  - docker
+install:
+  - make dependencies
+  - make build
+script: make test
