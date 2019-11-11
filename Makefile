@@ -13,17 +13,23 @@ COMPOSE      ?=export REPO=${REPO} TAG=${TAG} TARGET=${TARGET} \
 	&& docker-compose -f ${YML_FILE} -p ${PROJECT}
 
 build:
-	${COMPOSE} build
+	@ ${COMPOSE} build
+
+test:
+	@ docker run --rm \
+		-v `pwd`/app:/app \
+		-w /app \
+		php:7.3.11-alpine php tests/runTests.php
 
 dependencies:
-	docker run --rm \
+	@ docker run --rm \
 		-v `pwd`/app:/app \
 		composer install --ignore-platform-reqs \
 			--no-interaction \
 			--prefer-source
 
 update-dependencies:
-	docker run --rm \
+	@ docker run --rm \
 		-v `pwd`/app:/app \
 		composer update --ignore-platform-reqs \
 			--no-interaction \
@@ -33,30 +39,30 @@ clean:
 	@ rm -rfv ./app/vendor/
 
 start:
-	${COMPOSE}  up -d
+	@ ${COMPOSE}  up -d
 
 start-fg:
-	${COMPOSE}  up
+	@ ${COMPOSE}  up
 
 stop:
-	${COMPOSE} down
+	@ ${COMPOSE} down
 
 restart:
-	${COMPOSE} down \
+	@ ${COMPOSE} down \
 	&& ${COMPOSE} up -d
 
 restart-fg:
-	${COMPOSE} down \
+	@ ${COMPOSE} down \
 	&& ${COMPOSE} up
 
 push:
-	${COMPOSE} push
+	@ ${COMPOSE} push
 
 pull:
-	${COMPOSE} pull
+	@ ${COMPOSE} pull
 
 cluster-credetials:
-	cat ./.gcr_secret.json
+	@ cat ./.gcr_secret.json
 	kubectl delete secret gcr-json-key \
 	; kubectl create secret docker-registry gcr-json-key \
 		--docker-server=https://gcr.io \
@@ -65,7 +71,7 @@ cluster-credetials:
 		--docker-email=${DOCKER_EMAIL}
 
 cluster-apply:
-	export EXTERNAL_IP=${EXTERNAL_IP} REPO=${REPO} HOST=${HOST} REPO_CREDS=${REPO_CREDS} TAG=${TAG} \
+	@ export EXTERNAL_IP=${EXTERNAL_IP} REPO=${REPO} HOST=${HOST} REPO_CREDS=${REPO_CREDS} TAG=${TAG} \
 	&& cat infra/k8s/backend.deployment.yml | envsubst | kubectl apply -f - \
 	&& cat infra/k8s/backend.service.yml    | envsubst | kubectl apply -f - \
 	&& cat infra/k8s/backend.ingress.yml    | envsubst | kubectl apply -f -

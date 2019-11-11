@@ -16,7 +16,7 @@ final class Shout
     public function getText(): string
     {
         $text = $this->tweet->getText();
-        $text = preg_replace('/[\.\!\?,]$/', NULL, $text);
+        $text = preg_replace('/[\.\!\?,](\W+)?$/', '$1', $text);
         $text = preg_replace('/(\w)(\W+)?$/', '$1!$2', $text);
         $text = strtoupper($text);
 

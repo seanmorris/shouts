@@ -11,7 +11,8 @@
         "symfony/yaml": "*"
     },
     "require-dev": {
-        "symfony/dotenv": "*"
+        "symfony/dotenv": "*",
+        "simpletest/simpletest": "^1.1"
     },
     "config": {
         "preferred-install": {
