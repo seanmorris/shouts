@@ -1,7 +1,7 @@
 .PHONY: build dependencies update-dependencies clean start start-fg stop restart push pull cluster-apply cluster-delete
 
 DOCKER_EMAIL ?=sean@seanmorr.is
-HOST         ?=localhost
+HOST         ?=34.68.138.141.xip.io
 REPO         ?=gcr.io/shout-api-258623
 REPO_CREDS   ?=gcr-json-key
 TAG          ?=latest
@@ -20,6 +20,14 @@ test:
 		-v `pwd`/app:/app \
 		-w /app \
 		php:7.3.11-alpine php tests/runTests.php
+
+pack:
+	export TAR=/tmp/shout-api-seanmorris-`date +"%Y-%m-%d"`.tar.gz \
+	&& tar czf $$TAR --transform 's,^./,shout-api/,' \
+		--exclude='*.tar.gz' \
+		--exclude='.git' \
+		--exclude='.gcr_secret.json' . \
+	&& mv $$TAR .
 
 dependencies:
 	@ docker run --rm \
@@ -72,11 +80,11 @@ cluster-credetials:
 
 cluster-apply:
 	@ export EXTERNAL_IP=${EXTERNAL_IP} REPO=${REPO} HOST=${HOST} REPO_CREDS=${REPO_CREDS} TAG=${TAG} \
-	&& cat infra/k8s/redis.deployment.yml | envsubst | kubectl apply -f - \
-	&& cat infra/k8s/redis.service.yml    | envsubst | kubectl apply -f - \
-	&& cat infra/k8s/backend.deployment.yml | envsubst | kubectl apply -f - \
-	&& cat infra/k8s/backend.service.yml    | envsubst | kubectl apply -f - \
-	&& cat infra/k8s/backend.ingress.yml    | envsubst | kubectl apply -f -
+	&& cat infra/kubernetes/redis.deployment.yml | envsubst | kubectl apply -f - \
+	&& cat infra/kubernetes/redis.service.yml    | envsubst | kubectl apply -f - \
+	&& cat infra/kubernetes/backend.deployment.yml | envsubst | kubectl apply -f - \
+	&& cat infra/kubernetes/backend.service.yml    | envsubst | kubectl apply -f - \
+	&& cat infra/kubernetes/backend.ingress.yml    | envsubst | kubectl apply -f -
 
 cluster-delete:
 	@ export EXTERNAL_IP=${EXTERNAL_IP} \

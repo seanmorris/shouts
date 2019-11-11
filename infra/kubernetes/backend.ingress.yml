@@ -2,11 +2,13 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: backend
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: shout-static-ip
 spec:
  rules:
  - host: $HOST
    http:
      paths:
      - backend:
-         serviceName: backend
-         servicePort: 80
+        serviceName: backend
+        servicePort: 80

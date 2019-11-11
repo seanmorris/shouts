@@ -22,7 +22,8 @@ class ShoutTest extends \UnitTestCase
 			$this->assertEqual((string) $shout, $expectedOutput);
 		}
 	}
-	public function TestEmojiSuffix()
+
+	public function TestQuotedTweets()
 	{
 		$expectations = [
 			'"Be yourself; everyone else is already taken."' => '"BE YOURSELF; EVERYONE ELSE IS ALREADY TAKEN!"',
@@ -39,12 +40,29 @@ class ShoutTest extends \UnitTestCase
 		}
 	}
 
-	public function TestQuotedTweets()
+	public function TestParenTweets()
+	{
+		$expectations = [
+			'Something happend (Can you believe it?)' => 'SOMETHING HAPPEND (CAN YOU BELIEVE IT!)',
+			'I (a programmer) did something.' => 'I (A PROGRAMMER) DID SOMETHING!',
+			'(parenthesis)' => '(PARENTHESIS!)',
+		];
+
+		foreach($expectations as $input => $expectedOutput)
+		{
+			$tweet = new Tweet($input);
+			$shout = (string) new Shout($tweet);
+
+			$this->assertEqual((string) $shout, $expectedOutput);
+		}
+	}
+
+	public function TestEmojiTweets()
 	{
 		$expectations = [
 			'Gettin some chicken 🍗🍗🍗' => 'GETTIN SOME CHICKEN! 🍗🍗🍗',
 			'So hot today. 🌡️🌡️🌡️' => 'SO HOT TODAY! 🌡️🌡️🌡️',
-			'Honk honk 🤡🌎'  => 'HONK HONK! 🤡🌎',
+			'Honk 🤡🌎 honk'  => 'HONK 🤡🌎 HONK!',
 		];
 
 		foreach($expectations as $input => $expectedOutput)
