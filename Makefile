@@ -46,7 +46,10 @@ update-dependencies:
 			--prefer-source
 
 clean:
-	@ rm -rfv ./app/vendor/
+	@ docker run --rm \
+		-v `pwd`/app:/app \
+		-w /app \
+		php:7.3.11-alpine rm -rfv vendor/
 
 start:
 	@ ${COMPOSE}  up -d
