@@ -1,14 +1,11 @@
 .PHONY: build dependencies update-dependencies clean start start-fg stop restart push pull cluster-apply cluster-delete
 
-DOCKER_EMAIL ?=sean@seanmorr.is
 HOST         ?=shout.seanmorr.is
 REPO         ?=gcr.io/shout-api-258623
-REPO_CREDS   ?=gcr-json-key
 TAG          ?=latest
 PROJECT      ?=letgo_shout
 TARGET       ?=development
 YML_FILE     ?=infra/compose/base.yml
-YML_FILE     ?=infra/compose/${TARGET}.yml
 COMPOSE      ?=export REPO=${REPO} TAG=${TAG} TARGET=${TARGET} \
 	&& docker-compose -f ${YML_FILE} -p ${PROJECT}
 
@@ -73,15 +70,6 @@ push:
 
 pull:
 	@ ${COMPOSE} pull
-
-cluster-credetials:
-	@ cat ./.gcr_secret.json
-	kubectl delete secret gcr-json-key \
-	; kubectl create secret docker-registry gcr-json-key \
-		--docker-server=https://gcr.io \
-		--docker-username=_json_key \
-		--docker-password="$$(cat ./.gcr_secret.json)" \
-		--docker-email=${DOCKER_EMAIL}
 
 cluster-apply:
 	@ export EXTERNAL_IP=${EXTERNAL_IP} REPO=${REPO} HOST=${HOST} REPO_CREDS=${REPO_CREDS} TAG=${TAG} \
