@@ -26,17 +26,13 @@ final class ShoutController extends AbstractController
 			)]);
 		}
 
-		$key = sprintf(
-			'h-tweets;twitterName:%s;limit:%d',
-			$twitterName,
-			$limit
-		);
+		$key = sprintf('h-tweets;twitterName:%s', $twitterName);
 
 		$tweets = [];
 
 		if(!$tweets = $cache->load($key))
 		{
-			$tweets = $repo->searchByUserName($twitterName, $limit);
+			$tweets = $repo->searchByUserName($twitterName, static::MAX_TWEETS);
 
 			$cache->store($key, $tweets, static::CACHE_EXPIRY);
 		}
@@ -46,6 +42,6 @@ final class ShoutController extends AbstractController
 			$tweets
 		);
 
-		return JsonResponse::create($shouts);
+		return JsonResponse::create(array_slice($shouts, 0 , $limit));
 	}
 }

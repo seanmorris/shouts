@@ -1,7 +1,7 @@
 .PHONY: build dependencies update-dependencies clean start start-fg stop restart push pull cluster-apply cluster-delete
 
 DOCKER_EMAIL ?=sean@seanmorr.is
-HOST         ?=34.68.138.141.xip.io
+HOST         ?=shout.seanmorr.is
 REPO         ?=gcr.io/shout-api-258623
 REPO_CREDS   ?=gcr-json-key
 TAG          ?=latest

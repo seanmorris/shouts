@@ -1,12 +1,16 @@
+![avatar](https://avatars3.githubusercontent.com/u/640101?s=80&v=4)
+
 # ShoutApi
+
+![seanmorris-shoutapi](https://img.shields.io/badge/seanmorris-shoutapi-darkred?style=for-the-badge) [![Travis](https://img.shields.io/travis/seanmorris/shouts?style=for-the-badge)](https://travis-ci.org/seanmorris/shouts/) ![Size badge](https://img.shields.io/github/languages/code-size/seanmorris/shouts?style=for-the-badge)
 
 ## Demo
 
-The ShoutApi is available at http://35.225.137.171.xip.io/, and will become available at http://shout.seanmorr.is/ as soon as the DNS propagates. It is currently running on Kubernetes under GKE on Google Cloud.
+The ShoutApi is available at http://35.225.68.215.xip.io/, and will become available at http://shout.seanmorr.is/ as soon as the DNS propagates. It is currently running on Kubernetes under GKE on Google Cloud.
 
 ## Tests
 
-[![TravisCI build status](https://api.travis-ci.org/seanmorris/shouts.svg?branch=master)](https://travis-ci.org/seanmorris/shouts)
+[![Travis](https://img.shields.io/travis/seanmorris/shouts?style=flat-square)](https://travis-ci.org/seanmorris/shouts/)
 
 ShoutApi tests are run on push to github by travis CI. Output is available here: https://travis-ci.org/seanmorris/shouts.
 
@@ -18,23 +22,19 @@ $ make build        # build your images locally
 $ make test         # run the tests
 ```
 
-## Caching
-
-The results of any given request to the Twitter API will be cached for 5 minutes. The cache key is calculated by the twitter handle & limit supplied.
-
 ## Dependencies
 
 All the dependencies, their versions & configurations are handled by docker. You'll only need a few tools listed below to actually interact with the project. There's no need to search the web for the right version of a given dependency to run the project.
 
 The following technologies are used under the hood:
 
-* PHP 7.3
-* Redis
 * Apache & mod_rewrite
+* PHP 7.3
 * Pecl
+* Redis
 * Redis extension for PHP
 
-### Development
+### Development (docker-compose)
 
 Development dependencies are Docker, Docker-Compose & Make. Installation instructions are available at the following links:
 
@@ -42,7 +42,7 @@ Development dependencies are Docker, Docker-Compose & Make. Installation instruc
 * https://docs.docker.com/compose/install/
 * https://tecadmin.net/install-development-tools-on-debian/
 
-### Production
+### Production (kubernetes)
 
 The production deployment targets standard Kubernetes clusters. You'll need Make, Kubectl, and a target such as MiniKube, Google GKE, or Amazon EKS.
 
